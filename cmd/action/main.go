@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/devenjarvis/pr-staton/internal/chat"
-	"github.com/devenjarvis/pr-staton/internal/pr_statham"
+	"github.com/devenjarvis/pr-staton/internal/prpulse"
 	"github.com/devenjarvis/pr-staton/internal/pull_request"
 	"github.com/devenjarvis/pr-staton/pkg/gh"
 	"github.com/devenjarvis/pr-staton/pkg/slack"
@@ -21,8 +21,8 @@ func main() {
 	slackApi := slack.NewApi(webhookUrl)
 	chatService := chat.NewService(slackApi)
 
-	// Init PR Statham
-	prStathamService := pr_statham.NewService(ghService, chatService)
+	// Init PRPulse
+	prPulseService := prpulse.NewService(ghService, chatService)
 
 	// Send selected notification
 	notificationType := "reviewable_prs"
@@ -32,7 +32,7 @@ func main() {
 		repoOwner := "slack-go"
 		repoName := "slack"
 		channel := "channel"
-		prStathamService.SendReviewablePRs(repoOwner, repoName, channel)
+		prPulseService.SendReviewablePRs(repoOwner, repoName, channel)
 	}
 
 }

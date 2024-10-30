@@ -1,4 +1,4 @@
-package pr_statham
+package prpulse
 
 import (
 	"fmt"
